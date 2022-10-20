@@ -67,7 +67,7 @@ def loan_duration_from_user
 end
 
 loop do
-  puts 'Welcome to the loan calculator.'
+  puts 'Welcome to the monthly loan calculator.'
 
   loop do
     loan_amount = loan_amount_from_user
@@ -75,12 +75,12 @@ loop do
     loan_duration_years = loan_duration_from_user
 
     input_prompt = "You entered: $#{loan_amount}; " \
-                   "#{interest_rate}%; " \
+                   "#{interest_rate}% interest rate; " \
                    "#{loan_duration_years} year/s"
     prompt(input_prompt)
 
     prompt(MESSAGES['correct'])
-    answer = gets.chomp
+    answer = gets.chomp.downcase
     break if %w[y yes].include?(answer)
 
     prompt(MESSAGES['start_over'])
@@ -93,7 +93,7 @@ loop do
   puts "Your monthly payment is $#{monthly_payment.round(2)}"
   prompt(MESSAGES['another_calculation'])
 
-  answer = gets.chomp
+  answer = gets.chomp.downcase
 
   break unless %w[y yes].include?(answer)
 end
