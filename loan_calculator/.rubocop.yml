@@ -1,0 +1,23 @@
+Layout/ClosingHeredocIndentation:
+  Description: 'Checks the indentation of here document closings.'
+  Enabled: false
+
+Style/CommentedKeyword:
+  Description: 'Comments should not be on same line as def'
+  Enabled: false
+
+Style/HashEachMethods:
+  Description: 'each_key over keys.each'
+  Enabled: false
+
+Style/MultilineWhenThen:
+  Description: 'Avoid then for multiline when statement'
+  Enabled: false
+
+Style/InverseMethods:
+  Description: 'reject instead of reversed select'
+  Enabled: false
+
+Style/ZeroLengthPredicate:
+  Description: 'empty? instead of length == 0'
+  Enabled: false
