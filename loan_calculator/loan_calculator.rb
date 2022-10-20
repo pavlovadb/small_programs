@@ -27,6 +27,10 @@ loan_amount = ''
 interest_rate = ''
 loan_duration_years = ''
 
+def new_method
+
+end
+
 loop do
   puts 'Welcome to the loan calculator.'
 
