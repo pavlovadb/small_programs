@@ -71,26 +71,22 @@ loop do
 
   loop do
     loan_amount = loan_amount_from_user
-
     interest_rate = interest_rate_from_user
-
     loan_duration_years = loan_duration_from_user
 
     input_prompt = "You entered: $#{loan_amount}; " \
                    "#{interest_rate}%; " \
                    "#{loan_duration_years} year/s"
-
     prompt(input_prompt)
 
     prompt(MESSAGES['correct'])
     answer = gets.chomp
-
     break if %w[y yes].include?(answer)
 
     prompt(MESSAGES['start_over'])
   end
 
-  puts 'Calculating......'
+  puts '.....Calculating......'
 
   monthly_payment = calculate_monthly_payment(loan_amount, interest_rate, loan_duration_years)
 
@@ -103,7 +99,3 @@ loop do
 end
 
 puts 'Thank you for using the calculator.'
-
-
-# monthly_payment = calculate_monthly_payment(1000, 10.5, 1.5)
-# print(monthly_payment == 88.15)
