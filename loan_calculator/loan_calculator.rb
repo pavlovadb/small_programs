@@ -53,6 +53,19 @@ def interest_rate_from_user
   interest_rate
 end
 
+def loan_duration_from_user
+  loan_duration_years = ''
+  loop do
+    prompt(MESSAGES['loan_duration'])
+    loan_duration_years = gets.chomp
+
+    break if valid_user_input?(loan_duration_years)
+
+    prompt(MESSAGES['valid_duration'])
+  end
+  loan_duration_years
+end
+
 loop do
   puts 'Welcome to the loan calculator.'
 
@@ -61,14 +74,7 @@ loop do
 
     interest_rate = interest_rate_from_user
 
-    loop do
-      prompt(MESSAGES['loan_duration'])
-      loan_duration_years = gets.chomp
-
-      break if valid_user_input?(loan_duration_years)
-
-      prompt(MESSAGES['valid_duration'])
-    end
+    loan_duration_years = loan_duration_from_user
 
     input_prompt = "You entered: $#{loan_amount}; " \
                    "#{interest_rate}%; " \
