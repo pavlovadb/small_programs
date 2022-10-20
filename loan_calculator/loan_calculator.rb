@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'yaml'
 MESSAGES = YAML.load_file('loan_calculator_messages.yml')
 
@@ -18,9 +20,7 @@ def calculate_monthly_payment(loan_amount, interest_rate, loan_duration_years)
   monthly_interest_rate = annual_interest_rate / 12
   loan_duration_months = loan_duration_years.to_i * 12
 
-  monthly_payment = loan_amount.to_f * (monthly_interest_rate / (1 - (1 + monthly_interest_rate)**(-loan_duration_months)))
-
-  monthly_payment
+  loan_amount.to_f * (monthly_interest_rate / (1 - (1 + monthly_interest_rate)**-loan_duration_months))
 end
 
 loan_amount = ''
@@ -60,17 +60,12 @@ loop do
       prompt(MESSAGES['valid_duration'])
     end
 
-    input_prompt = <<~MSG
-      You entered:
-      Loan amount: $#{loan_amount}
-      Interest rate: #{interest_rate}%
-      Loan duration: #{loan_duration_years} year/s
-      => Is this correct? (enter y/n)
-    MSG
+    input_prompt = "You entered: $#{loan_amount}; " \
+                   "#{interest_rate}%; " \
+                   "#{loan_duration_years} year/s"
 
     prompt(input_prompt)
 
-    prompt("You entered: A loan - $#{loan_amount}; Interest Rate - #{interest_rate}%; Loan Duration - #{loan_duration_years} year/s")
     prompt(MESSAGES['correct'])
     answer = gets.chomp
 
