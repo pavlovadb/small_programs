@@ -88,7 +88,9 @@ loop do
 
   puts '.....Calculating......'
 
-  monthly_payment = calculate_monthly_payment(loan_amount, interest_rate, loan_duration_years)
+  monthly_payment = calculate_monthly_payment(loan_amount,
+                                              interest_rate,
+                                              loan_duration_years)
 
   puts "Your monthly payment is $#{monthly_payment.round(2)}"
   prompt(MESSAGES['another_calculation'])
