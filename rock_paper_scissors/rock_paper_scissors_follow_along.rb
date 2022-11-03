@@ -8,33 +8,39 @@ def prompt(message)
   puts "=> #{message}"
 end
 
+WINNING_COMBOS = {
+  "paper" => %w[rock spock],
+  "rock" => %w[scissors lizard],
+  "scissors" => %w[lizard paper],
+  "spock" => %w[rock scissors],
+  "lizard" => %w[spock paper]
+}
+
 def win?(first, second)
-  (first == 'paper' && second == 'rock' ||
-    first == 'paper' && second == 'spock' ||
-    first == 'rock' && second == 'scissors' ||
-    first == 'rock' && second == 'lizard' ||
-    first == 'scissors' && second == 'lizard' ||
-    first == 'scissors' && second == 'paper') ||
-    first == 'spock' && second == 'rock' ||
-    first == 'spock' && second == 'scissors' ||
-    first == 'lizard' && second == 'spock' ||
-    first == 'lizard' && second == 'paper'
+  WINNING_COMBOS[first].include?(second)
 end
 
 def display_results(player, computer_choice)
   if win?(player, computer_choice)
-    'You won!'
+    'You won this round!'
   elsif win?(computer_choice, player)
-    'Lost lost :('
+    'You lost this round.'
   else
     "It's a tie!"
   end
 end
 
+def display_score(player_score, computer_score)
+  if player_score == 3
+    puts 'You won the game'
+  else
+    computer_score == 3
+    puts 'You lost this game'
+  end
+end
 
 player = ''
-
-play_score = 0
+player_score = 0
 computer_score = 0
 
 loop do
@@ -65,10 +71,27 @@ loop do
 
   prompt display_results(player, computer_choice)
 
-  prompt 'Do you want to play again?'
-  play_again = gets.chomp
+  if win?(player, computer_choice)
+    player_score += 1
+  elsif win?(computer_choice, player)
+    computer_score += 1
+  end
 
-  break unless play_again.include?('y')
+  prompt "Your score: #{player_score}"
+  prompt "Computer score: #{computer_score}"
+
+  if player_score == 3
+    prompt 'GRAND WINNER'
+    break
+  elsif computer_score == 3
+    prompt 'COMPUTER WON'
+    break
+  end
+
+  # prompt 'Do you want to play again?'
+  # play_again = gets.chomp
+  #
+  # break unless play_again.include?('y')
 end
 
 prompt 'Thanks for playing'
